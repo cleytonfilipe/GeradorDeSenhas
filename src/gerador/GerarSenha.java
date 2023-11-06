@@ -7,6 +7,7 @@ public class GerarSenha {
 
 	public static void main(String[] args) {
 	
+		//Vetores com todos os caracteres que podem ser utilizados na senha:
 		String[] Uppercase = {
 			"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
 		};
@@ -20,22 +21,13 @@ public class GerarSenha {
 		};
 		
 		String [] SpecialCharacter = {
-				"!","@","#","$","%","&","*","-","_","+","^","~","<",">","?","/","\""
+			"!","@","#","$","%","&","*","-","_","+","^","~","<",">","?","/","\""
 		};
 		
-		int tamanhoMinimo = 6;
-		int tamanhoMaximo = 16;
-		
-		if (tamanhoMinimo > tamanhoMaximo) {
-			System.out.println("Sua senha deve ter no mínimo 6 dígitos e no máximo 16 digitos");
-			return;
-		}
-		
-		
+		//Interface de usuário:
 		Scanner tl = new Scanner(System.in);
 		System.out.println("Qual o tamanho da senha? ");
 		int numCaracteres = tl.nextInt();
-		tl.close();
 		if (numCaracteres >= 6 && numCaracteres <= 16) {
 			StringBuilder caracteresPermitidos = new StringBuilder();
 			
@@ -88,7 +80,6 @@ public class GerarSenha {
 			System.out.println("Sua senha deve possuir de 6 à 16 dígitos.");
 			return;
 		}
-
 	}
 
 
