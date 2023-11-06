@@ -1,5 +1,8 @@
 package gerador;
 
+import java.util.Scanner;
+import java.util.Random;
+
 public class GerarSenha {
 
 	public static void main(String[] args) {
@@ -20,20 +23,73 @@ public class GerarSenha {
 				"!","@","#","$","%","&","*","-","_","+","^","~","<",">","?","/","\""
 		};
 		
-		int upperLength = Uppercase.length;
-		int lowLength = Lowcase.length;
-		int numberLength = Numbers.length;
-		int specialLength = SpecialCharacter.length;
+		int tamanhoMinimo = 6;
+		int tamanhoMaximo = 16;
 		
-		int rand1 = (int) (Math.random() * upperLength);
-		int rand2 = (int) (Math.random() * lowLength);
-		int rand3 = (int) (Math.random() * numberLength);
-		int rand4 = (int) (Math.random() * specialLength);
+		if (tamanhoMinimo > tamanhoMaximo) {
+			System.out.println("Sua senha deve ter no mínimo 6 dígitos e no máximo 16 digitos");
+			return;
+		}
 		
-		String senha = Uppercase[rand1] + Lowcase[rand2] + Numbers[rand3] + SpecialCharacter[rand4];
 		
-		System.out.println("Sua senha é: " + senha);
+		Scanner tl = new Scanner(System.in);
+		System.out.println("Qual o tamanho da senha? ");
+		int numCaracteres = tl.nextInt();
+		tl.close();
+		if (numCaracteres >= 6 && numCaracteres <= 16) {
+			StringBuilder caracteresPermitidos = new StringBuilder();
+			
+			System.out.println("Você quer uma senha com letras maiúsculas? [S/N]");
+			boolean letrasMaiusculas = tl.next().equalsIgnoreCase("S");
+			
+			System.out.println("Você quer uma senha com letras minúsculas? [S/N]");
+			boolean letrasMinusculas = tl.next().equalsIgnoreCase("S");
+			
+			System.out.println("Você quer uma senha com números [S/N]");
+			boolean numeros = tl.next().equalsIgnoreCase("S");
+			
+			System.out.println("Você quer uma senha com caracteres especiais [S/N]");
+			boolean caracteresEspeciais = tl.next().equalsIgnoreCase("S");
+			
+			if (letrasMaiusculas) {
+				caracteresPermitidos.append(Uppercase);
+			}
+			
+			if (letrasMinusculas) {
+				caracteresPermitidos.append(Lowcase);
+			}
+			
+			if (numeros) {
+				caracteresPermitidos.append(Numbers);
+			}
+			
+			if (caracteresEspeciais) {
+				caracteresPermitidos.append(SpecialCharacter);
+			}
+			
+			if (caracteresPermitidos.length() == 0) {
+	            System.out.println("Você não selecionou nenhum tipo de caractere permitido. Por favor, escolha pelo menos um tipo.");
+	            return; // Encerra o programa
+	        }
+			
+			
+			Random random = new Random();
+			StringBuilder senhaRandom = new StringBuilder();
+			
+			for(int i = 0; i <= numCaracteres; i++) {
+				int caracteresRandom = random.nextInt(caracteresPermitidos.length());
+				char caractereAleatorio = caracteresPermitidos.charAt(caracteresRandom);
+	            senhaRandom.append(caractereAleatorio);
+			}
+			
+			System.out.println(senhaRandom.toString());
+		
+		} else {
+			System.out.println("Sua senha deve possuir de 6 à 16 dígitos.");
+			return;
+		}
 
 	}
+
 
 }
